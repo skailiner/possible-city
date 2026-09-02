@@ -90,6 +90,12 @@
   .hero-copy { @apply flex flex-col justify-between border-b border-border px-5 py-12 md:px-10 lg:border-r lg:border-b-0 lg:py-16; }
   .hero-title { @apply mt-7 max-w-2xl font-heading text-[clamp(3.7rem,8vw,7.6rem)] font-medium leading-[0.84] tracking-[-0.078em]; }
   .hero-deck { @apply mt-9 max-w-md text-base leading-7 text-muted-foreground md:text-lg; }
+  .hero-beta-card { @apply mt-8 flex w-full max-w-md items-center gap-3 rounded-2xl border border-foreground/15 bg-card/75 p-3 text-left transition hover:-translate-y-0.5 hover:border-foreground/30 hover:bg-card focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none; }
+  .hero-beta-card > svg { @apply ml-auto size-4; }
+  .hero-beta-card strong { @apply block text-sm font-semibold; }
+  .hero-beta-card small { @apply mt-1 block text-[11px] leading-4 text-muted-foreground; }
+  .hero-beta-icon { @apply grid size-10 shrink-0 place-items-center rounded-full bg-foreground text-background; }
+  .hero-beta-icon > svg { @apply size-4; }
   .field-meta { @apply mt-16 flex items-end justify-between gap-5 border-t border-border pt-5; }
   .vision-stage { @apply relative flex min-h-[760px] flex-col overflow-hidden bg-[var(--canvas)] p-5 md:p-9; }
   .vision-toolbar { @apply relative z-10 flex flex-wrap gap-2; }
@@ -100,6 +106,50 @@
   .vision-image { @apply absolute inset-0 size-full object-cover; }
   .image-label { @apply absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-background/90 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] backdrop-blur; }
   .vision-copy { @apply flex flex-col justify-center p-6 md:p-9; }
+  .studio-section { @apply border-t border-border bg-card px-5 py-20 md:px-10 md:py-28; }
+  .studio-heading { @apply grid gap-7 border-b border-border pb-12 lg:grid-cols-[1fr_0.8fr] lg:items-end; }
+  .studio-title { @apply mt-6 max-w-3xl font-heading text-5xl font-medium leading-[0.92] tracking-[-0.06em] md:text-7xl; }
+  .studio-grid { @apply mt-8 grid overflow-hidden rounded-[2rem] border border-border bg-background lg:grid-cols-[0.78fr_1.22fr]; }
+  .studio-controls { @apply flex flex-col gap-7 border-b border-border p-5 md:p-8 lg:border-r lg:border-b-0; }
+  .studio-step { @apply mb-4 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground; }
+  .upload-dropzone { @apply relative flex min-h-[250px] cursor-pointer flex-col items-center justify-center gap-3 overflow-hidden rounded-[1.5rem] border border-dashed border-foreground/25 bg-card p-6 text-center transition hover:border-foreground/50 hover:bg-secondary/45 focus-within:ring-2 focus-within:ring-ring; }
+  .upload-dropzone[data-dragging='true'] { @apply border-foreground bg-accent/35; }
+  .upload-icon { @apply mb-2 grid size-12 place-items-center rounded-full bg-accent; }
+  .upload-icon > svg { @apply size-5; }
+  .upload-limit { @apply mt-2 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground; }
+  .upload-preview { @apply absolute inset-0 size-full object-cover; }
+  .upload-change { @apply absolute bottom-4 left-4 rounded-full bg-background/92 px-3 py-2 text-xs font-medium shadow-sm backdrop-blur; }
+  .upload-name { @apply absolute right-4 bottom-4 max-w-[48%] truncate rounded-full bg-foreground/82 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.08em] text-background backdrop-blur; }
+  .studio-lenses { @apply grid gap-2; }
+  .studio-lens { @apply flex items-center gap-3 rounded-2xl border border-border bg-card p-3 text-left transition hover:border-foreground/25 hover:bg-secondary/50 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none; }
+  .studio-lens[data-active='true'] { @apply border-foreground bg-foreground text-background; }
+  .studio-lens-icon { @apply grid size-10 shrink-0 place-items-center rounded-full text-foreground; }
+  .studio-lens-icon > svg { @apply size-4; }
+  .studio-lens strong { @apply block text-sm font-semibold; }
+  .studio-lens small { @apply mt-1 block text-[11px] leading-4 text-muted-foreground; }
+  .studio-lens[data-active='true'] small { @apply text-background/65; }
+  .studio-output { @apply relative min-h-[610px] bg-[var(--canvas)] p-5 md:p-8; }
+  .studio-empty { @apply grid h-full min-h-[550px] place-content-center gap-7 rounded-[1.5rem] border border-foreground/10 bg-background/55 p-8; }
+  .studio-empty-mark { @apply grid size-14 place-items-center rounded-full border border-foreground/20; }
+  .studio-empty-mark > svg { @apply size-5; }
+  .studio-processing { @apply flex h-full min-h-[550px] flex-col justify-center gap-8; }
+  .processing-image { @apply relative aspect-[3/2] overflow-hidden rounded-[1.5rem] bg-foreground/10; }
+  .processing-image img { @apply size-full object-cover opacity-80; filter: saturate(.65); }
+  .processing-scan { @apply absolute inset-x-0 h-24 bg-gradient-to-b from-transparent via-accent/55 to-transparent; animation: processing-scan 2.4s ease-in-out infinite; }
+  .comparison-shell { @apply flex h-full flex-col gap-5; }
+  .comparison-frame { @apply relative min-h-[390px] flex-1 overflow-hidden rounded-[1.5rem] bg-foreground/10; }
+  .comparison-image { @apply absolute inset-0 size-full object-cover; }
+  .comparison-before { @apply absolute inset-0 overflow-hidden; }
+  .comparison-line { @apply absolute inset-y-0 w-px -translate-x-1/2 bg-background shadow-[0_0_0_1px_rgba(0,0,0,.2)]; }
+  .comparison-line span { @apply absolute top-1/2 left-1/2 grid size-9 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-foreground/20 bg-background text-sm shadow-lg; }
+  .comparison-label { @apply absolute top-4 rounded-full bg-background/90 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] backdrop-blur; }
+  .comparison-control { @apply flex items-center gap-4 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground; }
+  .comparison-control input { @apply h-1 flex-1 cursor-ew-resize appearance-none rounded-full bg-foreground/15 accent-foreground; }
+  .privacy-strip { @apply mt-8 grid gap-5 rounded-[2rem] bg-foreground p-7 text-background md:grid-cols-[40px_1fr] md:p-9; }
+  .privacy-strip > svg { @apply size-5 text-background/65; }
+  .privacy-strip h3 { @apply font-heading text-2xl tracking-[-0.035em]; }
+  .privacy-strip p { @apply mt-3 max-w-5xl text-xs leading-5 text-background/65; }
+  .privacy-strip a { @apply underline decoration-background/35 underline-offset-4 hover:text-background; }
   .section-shell { @apply px-5 py-20 md:px-10 md:py-28; }
   .section-intro { @apply grid gap-7 lg:grid-cols-[0.42fr_1fr_0.65fr] lg:items-start; }
   .section-title { @apply max-w-3xl font-heading text-4xl font-medium leading-[0.98] tracking-[-0.055em] md:text-6xl; }
@@ -133,6 +183,13 @@
 @keyframes vision-in {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes processing-scan {
+  0%, 100% { top: -6rem; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

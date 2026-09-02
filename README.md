@@ -4,9 +4,9 @@ Possible City is a civic-imagination instrument for exploring grounded alternati
 
 This repository contains portfolio build 001 for [skailiner](https://github.com/skailiner).
 
-## The first field study
+## The field study and public beta
 
-The first release uses a composite viaduct-edge setting in Singapore and offers three lenses:
+The site uses a composite viaduct-edge setting in Singapore and lets visitors apply the same three lenses to one public-space photo:
 
 - **Ecological:** make stormwater and tropical shade part of the public realm.
 - **Communal:** test a robust shared table and a lightweight neighbourhood care structure.
@@ -21,9 +21,11 @@ The study is speculative. It does not depict an approved project or a surveyed p
 3. Make stewardship, maintenance, consent, and exclusion visible.
 4. Pair every image with a credible first action.
 
-## Privacy and governance
+## Photo processing, privacy, and limits
 
-The proposal form stores a field note only in the visitor's browser. This release does not collect precise location, photographs, contact information, or public submissions. Persistent community data will only be introduced alongside a moderation, consent, and governance model.
+Photos are decoded, resized, converted to JPEG, and stripped of metadata in the visitor's browser. The prepared image is sent through the server-side OpenAI API to GPT Image 2 and the result is returned directly to the browser. Possible City does not store either image. The server retains a short-lived one-way network hash for a three-attempt daily limit and an aggregate monthly total capped at 120 successful transformations. The text field note remains device-local.
+
+Visitors should upload only public-space photos they have the right to share and should avoid close-up faces, licence plates, private interiors, and sensitive locations. Generated views are speculative conversation images, not plans or approvals.
 
 ## Development
 
@@ -31,6 +33,8 @@ The proposal form stores a field note only in the visitor's browser. This releas
 npm install
 npm run dev
 ```
+
+Copy `.env.example` to `.env.local` and provide `OPENAI_API_KEY` for local image transformations. Never expose this value to the browser.
 
 Create a production build with `npm run build`.
 

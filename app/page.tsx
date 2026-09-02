@@ -1,6 +1,7 @@
 'use client';
+/* oxlint-disable next/no-img-element */
 
-import { FormEvent, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import {
   ArrowDown,
   ArrowRight,
@@ -10,12 +11,14 @@ import {
   MapPin,
   Share2,
   Sparkles,
+  Upload,
   Users,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { ImageStudio } from '@/components/image-studio';
 
 const visions = [
   {
@@ -95,8 +98,8 @@ export default function Home() {
   const active =
     visions.find((vision) => vision.id === activeVision) ?? visions[0];
 
-  const scrollToProposal = () => {
-    document.querySelector('#propose')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToStudio = () => {
+    document.querySelector('#imagine')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const shareVision = async () => {
@@ -119,7 +122,7 @@ export default function Home() {
     }
   };
 
-  const saveProposal = (event: FormEvent<HTMLFormElement>) => {
+  const saveProposal = (event: SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const proposal = {
@@ -145,16 +148,16 @@ export default function Home() {
           </span>
         </a>
         <nav className="hidden items-center gap-7 text-xs md:flex" aria-label="Primary navigation">
-          <a className="nav-link" href="#vision">Explore</a>
+          <a className="nav-link" href="#imagine">Imagine yours</a>
+          <a className="nav-link" href="#vision">Explore examples</a>
           <a className="nav-link" href="#first-move">First move</a>
-          <a className="nav-link" href="#method">Method</a>
         </nav>
         <Button
           variant="outline"
           className="h-9 rounded-full border-foreground/25 bg-background/70 px-4"
-          onClick={scrollToProposal}
+          onClick={scrollToStudio}
         >
-          Propose a place
+          Try your place
           <ArrowDown className="size-3.5" />
         </Button>
       </header>
@@ -165,8 +168,16 @@ export default function Home() {
             <p className="eyebrow">A civic imagination instrument</p>
             <h1 className="hero-title">See what a place could become.</h1>
             <p className="hero-deck">
-              Explore three grounded futures for an ordinary urban space—then find the first small action that could make one real.
+              Upload an ordinary public-space photo, choose a civic lens, and see one grounded future—then find the first small action it could suggest.
             </p>
+            <button type="button" className="hero-beta-card" onClick={scrollToStudio}>
+              <span className="hero-beta-icon"><Upload /></span>
+              <span>
+                <strong>Imagine your own place</strong>
+                <small>Private, one-time photo processing · public beta</small>
+              </span>
+              <ArrowRight />
+            </button>
           </div>
           <div className="field-meta">
             <div>
@@ -175,7 +186,7 @@ export default function Home() {
             </div>
             <div className="text-right">
               <p className="metric-label">Status</p>
-              <p className="mt-2 text-xs text-muted-foreground">Composite study · Singapore</p>
+              <p className="mt-2 text-xs text-muted-foreground">Public beta · limited pool</p>
             </div>
           </div>
         </div>
@@ -249,6 +260,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ImageStudio />
+
       <section id="first-move" className="section-shell border-t border-border">
         <div className="section-intro">
           <p className="eyebrow">From image to agency</p>
@@ -320,13 +333,13 @@ export default function Home() {
             What place keeps asking for your attention?
           </h2>
           <p className="mt-7 max-w-lg text-base leading-7 text-muted-foreground">
-            Frame a place without uploading a photo or sharing your precise location. This first release saves the note only on your device.
+            Prefer to begin with words? Save a private field note on this device. It is separate from the photo beta and never leaves your browser.
           </p>
         </div>
 
         <form className="proposal-form" onSubmit={saveProposal}>
           {proposalSaved ? (
-            <div className="saved-state" role="status">
+            <output className="saved-state">
               <span className="grid size-12 place-items-center rounded-full bg-accent"><Check /></span>
               <p className="mt-6 font-heading text-3xl tracking-[-0.04em]">Field note saved.</p>
               <p className="mt-3 max-w-sm text-sm leading-6 text-muted-foreground">
@@ -335,7 +348,7 @@ export default function Home() {
               <Button className="mt-7 rounded-full px-5" type="button" onClick={() => setProposalSaved(false)}>
                 Edit the note
               </Button>
-            </div>
+            </output>
           ) : (
             <FieldGroup>
               <Field>
@@ -362,7 +375,7 @@ export default function Home() {
       <footer className="site-footer">
         <div>
           <p className="font-heading text-lg font-semibold">Possible City</p>
-          <p className="mt-2 text-xs text-muted-foreground">Portfolio build 001 · An experiment in grounded civic imagination.</p>
+          <p className="mt-2 text-xs text-muted-foreground">Public beta · An experiment in grounded civic imagination.</p>
         </div>
         <Button variant="ghost" className="rounded-full" onClick={shareVision}>
           <Share2 />

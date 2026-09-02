@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://possible-city.skaihai.chatgpt.site'),
   title: 'Possible City — See what a place could become',
   description:
-    'Explore grounded alternative futures for ordinary urban places, then find the first small action that could make one real.',
+    'Upload a public-space photo and test a grounded ecological, communal, or contemplative future with GPT Image.',
   openGraph: {
     title: 'Possible City — See what a place could become',
     description:
-      'Explore grounded alternative futures for ordinary urban places, then find the first small action that could make one real.',
+      'Upload a public-space photo and test a grounded ecological, communal, or contemplative future with GPT Image.',
     type: 'website',
     url: 'https://possible-city.skaihai.chatgpt.site',
     images: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Possible City — See what a place could become',
     description:
-      'Explore grounded alternative futures for ordinary urban places, then find the first small action that could make one real.',
+      'Upload a public-space photo and test a grounded ecological, communal, or contemplative future with GPT Image.',
     images: ['/og.png'],
   },
 };
