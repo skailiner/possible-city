@@ -1,0 +1,140 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  --background: oklch(0.967 0.018 92);
+  --foreground: oklch(0.25 0.025 110);
+  --card: oklch(0.982 0.013 92);
+  --card-foreground: var(--foreground);
+  --primary: oklch(0.25 0.025 110);
+  --primary-foreground: oklch(0.975 0.015 92);
+  --secondary: oklch(0.912 0.027 94);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.917 0.018 92);
+  --muted-foreground: oklch(0.49 0.026 100);
+  --accent: oklch(0.79 0.105 120);
+  --accent-foreground: var(--foreground);
+  --border: oklch(0.79 0.025 95 / 62%);
+  --input: var(--border);
+  --ring: oklch(0.52 0.09 121);
+  --destructive: oklch(0.58 0.2 28);
+  --canvas: oklch(0.9 0.04 112);
+  --radius: 0.85rem;
+}
+
+.dark {
+  --background: oklch(0.205 0.019 105);
+  --foreground: oklch(0.94 0.02 91);
+  --card: oklch(0.245 0.02 105);
+  --card-foreground: var(--foreground);
+  --primary: oklch(0.9 0.04 105);
+  --primary-foreground: oklch(0.21 0.02 105);
+  --secondary: oklch(0.3 0.02 105);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.3 0.02 105);
+  --muted-foreground: oklch(0.7 0.02 95);
+  --accent: oklch(0.68 0.1 120);
+  --accent-foreground: oklch(0.18 0.02 105);
+  --border: oklch(0.55 0.02 95 / 45%);
+  --input: var(--border);
+  --ring: oklch(0.69 0.09 120);
+  --canvas: oklch(0.27 0.03 112);
+}
+
+@layer base {
+  * { @apply border-border outline-ring/50; }
+  html { @apply scroll-smooth font-sans; }
+  body { @apply bg-background text-foreground antialiased; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+}
+
+@layer components {
+  .eyebrow { @apply font-mono text-[10px] font-medium uppercase tracking-[0.17em] text-muted-foreground; }
+  .metric-label { @apply font-mono text-[9px] uppercase tracking-[0.13em] text-muted-foreground; }
+  .site-header { @apply sticky top-0 z-50 flex h-[73px] items-center justify-between border-b border-border bg-background/90 px-5 backdrop-blur-xl md:px-10; }
+  .brand-lockup { @apply flex items-center gap-3; }
+  .brand-mark { @apply grid size-9 place-items-center rounded-full border border-foreground/20 text-xs font-semibold; }
+  .nav-link { @apply text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground; }
+  .hero-grid { @apply grid min-h-[calc(100vh-73px)] lg:grid-cols-[minmax(320px,0.74fr)_minmax(0,1.26fr)]; }
+  .hero-copy { @apply flex flex-col justify-between border-b border-border px-5 py-12 md:px-10 lg:border-r lg:border-b-0 lg:py-16; }
+  .hero-title { @apply mt-7 max-w-2xl font-heading text-[clamp(3.7rem,8vw,7.6rem)] font-medium leading-[0.84] tracking-[-0.078em]; }
+  .hero-deck { @apply mt-9 max-w-md text-base leading-7 text-muted-foreground md:text-lg; }
+  .field-meta { @apply mt-16 flex items-end justify-between gap-5 border-t border-border pt-5; }
+  .vision-stage { @apply relative flex min-h-[760px] flex-col overflow-hidden bg-[var(--canvas)] p-5 md:p-9; }
+  .vision-toolbar { @apply relative z-10 flex flex-wrap gap-2; }
+  .lens-button { @apply inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/75 px-4 py-2 text-xs font-medium text-foreground/70 backdrop-blur transition duration-200 hover:bg-background focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none; }
+  .lens-button[data-active='true'] { @apply border-foreground bg-foreground text-background; }
+  .vision-card { @apply relative z-10 mt-auto grid overflow-hidden rounded-[2rem] border border-foreground/10 bg-background/94 shadow-[0_30px_80px_rgba(38,43,33,0.16)] backdrop-blur md:grid-cols-[1.06fr_0.94fr]; animation: vision-in 420ms cubic-bezier(.2,.75,.25,1) both; }
+  .vision-image-wrap { @apply relative min-h-72 overflow-hidden bg-foreground/10 md:min-h-[480px]; }
+  .vision-image { @apply absolute inset-0 size-full object-cover; }
+  .image-label { @apply absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-background/90 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.1em] backdrop-blur; }
+  .vision-copy { @apply flex flex-col justify-center p-6 md:p-9; }
+  .section-shell { @apply px-5 py-20 md:px-10 md:py-28; }
+  .section-intro { @apply grid gap-7 lg:grid-cols-[0.42fr_1fr_0.65fr] lg:items-start; }
+  .section-title { @apply max-w-3xl font-heading text-4xl font-medium leading-[0.98] tracking-[-0.055em] md:text-6xl; }
+  .section-deck { @apply max-w-md text-sm leading-6 text-muted-foreground lg:pt-2; }
+  .move-grid { @apply mt-16 grid gap-6 lg:grid-cols-[0.72fr_1.28fr]; }
+  .move-callout { @apply rounded-[2rem] bg-accent p-8 md:p-10; }
+  .step-list { @apply overflow-hidden rounded-[2rem] border border-border bg-card; }
+  .step-item { @apply grid grid-cols-[42px_1fr] gap-4 border-b border-border p-6 last:border-b-0 md:grid-cols-[56px_1fr] md:p-8; }
+  .step-number { @apply font-mono text-xs text-muted-foreground; }
+  .method-section { @apply bg-foreground px-5 py-20 text-background md:px-10 md:py-28; }
+  .method-heading { @apply border-b border-background/20 pb-14; }
+  .principle-grid { @apply mt-8 grid gap-px overflow-hidden rounded-[2rem] bg-background/18 lg:grid-cols-3; }
+  .principle-card { @apply min-h-[390px] bg-foreground p-8 md:p-10; }
+  .principle-card > svg { @apply size-5 text-background/70; }
+  .proposal-section { @apply grid border-b border-border lg:grid-cols-2; }
+  .proposal-copy { @apply border-b border-border px-5 py-20 md:px-10 md:py-24 lg:border-r lg:border-b-0; }
+  .proposal-form { @apply flex min-h-[620px] items-center bg-card px-5 py-16 md:px-12; }
+  .form-control { @apply h-auto rounded-xl border-foreground/20 bg-background px-4 py-3 text-base shadow-none; }
+  .saved-state { @apply mx-auto flex max-w-md flex-col items-start; }
+  .site-footer { @apply flex flex-col gap-6 px-5 py-10 md:flex-row md:items-center md:justify-between md:px-10; }
+}
+
+.place-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklch, var(--foreground) 8%, transparent) 1px, transparent 1px);
+  background-size: 38px 38px;
+  mask-image: linear-gradient(to bottom, black, transparent 84%);
+}
+
+@keyframes vision-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}
